@@ -5,8 +5,35 @@
 	<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     </head>
     <body>
+
+	<div style="background-image: url(https://www.denofgeek.com/wp-content/uploads/2021/09/book-of-boba-fett-release-date-trailer-cast-plot.jpg?fit=1688%2C940);">	
+
 	    <h1 id="mytime"></h1>
 	<script>
+	
+		var countDown = new Date("Dec 29, 2021 12:00:00").getTime();
+
+		var x = setInterval(function() {
+
+  		var today = new Date().getTime();
+
+  		var distance = countDown - today;
+
+  		var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  		var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  		var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  		var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+  		document.getElementById("demo").innerHTML = days + "d " + hours + "h "
+  		+ minutes + "m " + seconds + "s ";
+
+	    	if (distance < 0) {
+    			clearInterval(x);
+    			document.getElementById("demo").innerHTML = "EXPIRED";
+ 	 	}
+		}, 1000);
+
+
 		setInterval( function(){ $('#mytime').html( "Time is " + new Date());}, 500);
 	</script>
     </body>
