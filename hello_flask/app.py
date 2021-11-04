@@ -118,7 +118,7 @@ def authUser():
     credentials = str(x[0])
     if bcrypt.checkpw(bytes(request.form['pword'], 'utf-8'),credentials.encode('utf-8')):
         jwt_str = jwt.encode({"username": request.form['uname'], "password": request.form['pword']}, JWT_SECRET, algorithm='HS256')
-        print(=========)
+        print('=========')
         print(jwt_str)
         return json_response(jwt=jwt_str)
 
