@@ -38,7 +38,7 @@ def buy():
 
 @app.route('/hello') #endpoint
 def hello():
-    return render_template('hello.html',img_url=IMGS_URL[CUR_ENV] ) 
+    return render_template('hello.html',img_url=IMGS_URL[CUR_ENV] )
 
 @app.route('/back',  methods=['GET']) #endpoint
 def back():
@@ -78,7 +78,7 @@ def get_time():
 def auth2():
     jwt_str = jwt.encode({"username" : "cary",
                             "age" : "so young",
-                            "books_ordered" : ['f', 'e'] } 
+                            "books_ordered" : ['f', 'e'] }
                             , JWT_SECRET, algorithm="HS256")
     #print(request.form['username'])
     return json_response(jwt=jwt_str)
@@ -98,5 +98,130 @@ def hellodb():
     return json_response(status="good")
 
 
-app.run(host='0.0.0.0', port=80)
+#Assignment 3
+@app.route('/authUser', methods=[POST])#endpoint
+def authUser():
+    print(request.form)
+    print('=============')
 
+    cur = global_db_con.cursor()
+    uNameString = "select password from users where username ='"
+    uNameString += request.form['uname']
+    uNameString += "';"
+
+    cur.execute(uNameString)
+
+    x = cur.fetchone()
+
+    print x[0]
+
+    credentials = str(x[0])
+    if bcrypt.checkpw(bytes(request.form['pword'], 'utf-8'),credentials.encode('utf-8')):
+        jwt_str = jwt.encode({"username": request.form['uname'], "password": request.form['pword']}, JWT_SECRET, algorithm='HS256')
+        print(=========)
+        print(jwt_str)
+        return json_response(jwt=jwt_str)
+
+    print('Invalid')
+
+    return json_response(status='401',msg="Invalid Credentials")
+
+@app.route('/getBooks', methods=['GET']) #endpoint
+def getBooks():
+    print('Verifying JWT')
+
+    authHeader = request.headers.get('Authorization')
+
+    print(authHeader)
+
+    tokenVal = checkToken(authHeader)
+
+    print('============')
+    print(decoded.get('username'))
+    print('============')
+    print(decoded.get('Jarrett'))
+
+    if tokenVal == False:
+        return json_response(status='404', msg='Invalid JWT Token')
+
+    print('JWT Valid')
+
+    cur = global_db_con.cursor()
+    book_nameReq = 'select name from books;'
+    cur.execute(book_nameReq)
+    book_nameResp = cur.fetchall()
+
+    print(book_nameResp)
+
+    book_priceReq = 'select price from books;'
+    cur.execute(book_priceReq)
+    book_priceResp = cur.fetchall()
+
+    print(book_priceResp)
+
+    return json_response(jwt=authHeader, bookNames=book_nameResp, bookPrices=book_priceResp)
+
+@app.route('/addUser', methods=['POST']) #endpoint
+def addUser():
+    print(request.form)
+
+    tempU = request.form['newUser']
+    tempP = request.form['newPass']
+
+    saltyBoi = bcrypt.hashpw(bytes(request.form['newPass'], 'utf-8'), bcrypt.gensalt(10))
+
+    print(tempU)
+    print(saltyBoi.decode('utf-8'))
+
+    sub = "insert into users(username, password) values('"
+    sub += str(tempU)
+    sub += "','"
+    sub += str(tempP)
+    sub += "');"
+
+    print(sub)
+
+    cur = global_db_con.cursor()
+    cur.execute(sub)
+    global_db_con.commit()
+
+    return json_response(status="good")
+
+def decodeToken(authToken):
+    decoded = jwt.decode(authToken, JWT_SECRET, algorithm=['HS256'])
+    tokenStr = decoded.get('username')
+    return tokenStr
+
+def checkToken(authToken):
+    print(authToken)
+
+    tokenStr = decodeToken(authToken)
+    cur = global_db_con.cursor()
+
+    dbUser = "select exists (select username from users where username =')"
+    dbUser += tokenStr
+    dbUser += "' limit 1);"
+
+    cur.execute(dbUser)
+    x = cur.fetchone()
+
+    print(x[0])
+
+    if x[0] == True:
+        return True
+    return False
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+app.run(host='0.0.0.0', port=80)

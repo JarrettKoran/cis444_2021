@@ -6,35 +6,75 @@
     <body>
 
 	<script>
-		function check_form(){
 
-			alert($('#fname').val());
-			alert($('#lname').val());
+      $(document).ready(function() {
+          $('#login').click(loginSubmit);
+      });
 
-			$('#login').hide();
-			$('#books').show();
-			
-			$('#cars').append('<option value="volvo">Thank you Taco</option>')
+      function loginSubmit() {
+          alert('Submitting Login Form');
+          $.ajax({
+            type: "POST",
+            url: "/authUser",
+            data: $("#form").serialize(),
+            success: function(temp) {
+              if(temp.jwt == null)
+                alert(temp.status + ' ' + temp.msg);
+              else {
+                localStorage.clear()
+                alert(temp.jwt);
+                localStorage.setItem('token',temp.jwt);
+                
+                $('#login').hide();
+                $('#books').show();
+                populateBooks();
+              }
+            }
+          });
+      }
 
+      function populateBooks() {
+        $.ajax({
+          type: "GET",
+          url: "/getBooks",
+          success: function(temp) {
+            alert('Success');
+          }
+        });
+      }
 
-			return false;
+      function signupSwap() {
+        $('#login').hide();
+        $('#signup').show();
+      }
 
-			if($('#fname').val().length == 0){
-				return false;
-			}else{
-				return true;
-			}
-		}
+      function addNewUser() {
+        alert("New User Added");
+        return true;
+      }
 
 	</script>
-            <div id="login">
-	    	<form action="/backp" method="post">
-  			<label for="fname">First name:</label><br>
-  				<input type="text" id="fname" name="fname" value="John"><br>
-  			<label for="lname">Last name:</label><br>
-  				<input type="password" id="lname" name="lname" value="Doe"><br><br>
-  			<input type="submit" value="Signup" onclick="return check_form();">
-		</form>
+
+
+      <div id="login">
+	    	<form id="form">
+    			<label for="uname">Username:</label><br>
+    				<input type="text" id="uname" name="uname" value="Username"><br>
+    			<label for="pword">Password:</label><br>
+    				<input type="password" id="pword" name="pword" value="password"><br><br>
+            <input type="button" value="Login" id="Login">
+    			  <input type="button" value="SignUp" onclick="return signupSwap();">
+		    </form>
+	    </div>
+
+      <div id="signup" style="display:none">
+	    	<form action="/addUser" method="post">
+    			<label for="newUser">Enter a Username:</label><br>
+    				<input type="text" id="newUser" name="newUser" value="Username"><br>
+    			<label for="newPass">Password:</label><br>
+    				<input type="password" id="newPass" name="newPass" value="password"><br><br>
+    			 <input type="submit" value="Submit" onclick="return addNewUser();">
+		    </form>
 	    </div>
 
 	    <div id="books" style="display:none">
