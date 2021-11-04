@@ -113,7 +113,7 @@ def authUser():
 
     x = cur.fetchone()
 
-    print x[0]
+    print (x[0])
 
     credentials = str(x[0])
     if bcrypt.checkpw(bytes(request.form['pword'], 'utf-8'),credentials.encode('utf-8')):
