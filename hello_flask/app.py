@@ -210,18 +210,6 @@ def checkToken(authToken):
     if x[0] == True:
         return True
     return False
-
-
-
-
-
-
-
-
-
-
-
-
-
+    
 
 app.run(host='0.0.0.0', port=80)
