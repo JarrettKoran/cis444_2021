@@ -44,20 +44,38 @@
               alert(temp.status + '' + temp.msg);
               window.location.reload();
             } else {
-              alert(temp.bookTitles[0])
-              alert(temp.bookPrices[0])
-              alert(temp.bookTitles.length)
+              //alert(temp.bookTitles[0])
+              //alert(temp.bookPrices[0])
+              //alert(temp.bookTitles.length)
               for(var i=0; i<temp.bookTitles.length;i++) {
 
                 $('#theShelf').append($('<option>',{value: temp.bookTitles[i],text: 'Title: ' + temp.bookTitles[i] + ' Price: ¥' + temp.bookPrices[i]}));
 
-                alert(i);
+                //alert(i);
               }
             }
           }
         });
       }
 
+      function buyBook() {
+
+        var currentBook = document.getElementById("theShelf");
+
+        $.ajax({
+          type: "POST",
+          url: "/buyBook",
+          data: currentBook:currentBook,
+          headers: {Authorization: localStorage.getItem('token')},
+          success: function(temp) {
+            alert('Book Bought');
+            if(temp.jwt == null) {
+              alert(temp.status + '' + temp.msg);
+              window.location.reload();
+            }
+          }
+        });
+      }
 
       function signupSwap() {
         $('#login').hide();
@@ -97,6 +115,7 @@
 		    <h1>Available Titles:</h1>
 
 		    <select name="theShelf" id="theShelf"></select>
+        <input type="submit" value="Buy current title" onclick="return buyBook();">
 
 	    </div>
 

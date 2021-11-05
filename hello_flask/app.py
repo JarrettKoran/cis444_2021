@@ -190,6 +190,39 @@ def getBooks():
 
     return json_response(jwt=authHeader, bookTitles=book_titleResp, bookPrices=book_priceResp)
 
+@app.route('/buyBook', methods=['POST']) #endpoint
+def buyBook():
+    print(request.form)
+
+    authHeader = request.headers.get('Authorization')
+
+    tokenVal = decodeToken(authHeader)
+
+    print(tokenVal)
+
+    book = request.currentBook
+
+    print(book)
+
+    today = date.today()
+
+    print(today)
+
+    cart = "INSERT INTO cart (username, title, dop) VALUES ('"
+    cart += str(tokenVal)
+    cart += "','"
+    cart += str(book)
+    cart += "','"
+    cart += str(today)
+    cart += "');"
+
+    print(cart)
+
+    #cur = global_db_con.cursor()
+    #cur.execute(cart)
+    #global_db_con.commit()
+
+    return json_response(status="good")
 
 
 def decodeToken(token):
