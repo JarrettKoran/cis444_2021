@@ -105,11 +105,12 @@ def authUser():
     print('=============')
 
     cur = global_db_con.cursor()
-    uNameString = "SELECT password FROM users WHERE username ='"
-    uNameString += request.form['uname']
-    uNameString += "';"
 
-    cur.execute(uNameString)
+    uName = "SELECT password FROM users WHERE username ='"
+    uName += request.form['uname']
+    uName += "';"
+
+    cur.execute(uName)
 
     x = cur.fetchone()
 
@@ -118,13 +119,41 @@ def authUser():
     credentials = str(x[0])
     if bcrypt.checkpw(bytes(request.form['pword'], 'utf-8'),credentials.encode('utf-8')):
         jwt_str = jwt.encode({"username": request.form['uname'], "password": request.form['pword']}, JWT_SECRET, algorithm='HS256')
+
         print('=========')
         print(jwt_str)
+
         return json_response(jwt=jwt_str)
 
     print('Invalid')
 
     return json_response(status='401',msg="Invalid Credentials")
+
+@app.route('/newUser', methods=['POST']) #endpoint
+def newUser():
+    print(request.form)
+
+    tempU = request.form['newUser']
+    tempP = request.form['newPass']
+
+    saltyBoi = bcrypt.hashpw(bytes(request.form['newPass'], 'utf-8'), bcrypt.gensalt(10))
+
+    print(tempU)
+    print(saltyBoi.decode('utf-8'))
+
+    sub = "INSERT INTO users (username, password) VALUES ('"
+    sub += str(tempU)
+    sub += "','"
+    sub += str(saltyBoi.decode('utf-8'))
+    sub += "');"
+
+    print(sub)
+
+    cur = global_db_con.cursor()
+    cur.execute(sub)
+    global_db_con.commit()
+
+    return json_response(status="good")
 
 @app.route('/getBooks', methods=['GET']) #endpoint
 def getBooks():
@@ -161,45 +190,25 @@ def getBooks():
 
     return json_response(jwt=authHeader, bookNames=book_nameResp, bookPrices=book_priceResp)
 
-@app.route('/newUser', methods=['POST']) #endpoint
-def newUser():
-    print(request.form)
 
-    tempU = request.form['newUser']
-    tempP = request.form['newPass']
 
-    saltyBoi = bcrypt.hashpw(bytes(request.form['newPass'], 'utf-8'), bcrypt.gensalt(10))
+def decodeToken(token):
+    print('in decode token')
 
-    print(tempU)
-    print(saltyBoi.decode('utf-8'))
+    decoded = jwt.decode(token, JWT_SECRET, algorithm=['HS256'])
+    tStr = decoded.get('username')
+    return tStr
 
-    sub = "INSERT INTO users (username, password) VALUES ('"
-    sub += str(tempU)
-    sub += "','"
-    sub += str(saltyBoi.decode('utf-8'))
-    sub += "');"
+def checkToken(token):
+    print(token)
+    print('in check token')
 
-    print(sub)
 
-    cur = global_db_con.cursor()
-    cur.execute(sub)
-    global_db_con.commit()
-
-    return json_response(status="good")
-
-def decodeToken(authToken):
-    decoded = jwt.decode(authToken, JWT_SECRET, algorithm=['HS256'])
-    tokenStr = decoded.get('username')
-    return tokenStr
-
-def checkToken(authToken):
-    print(authToken)
-
-    tokenStr = decodeToken(authToken)
+    tStr = decodeToken(token)
     cur = global_db_con.cursor()
 
     dbUser = "SELECT EXISTS (SELECT username FROM users WHERE username =')"
-    dbUser += tokenStr
+    dbUser += tStr
     dbUser += "' LIMIT 1);"
 
     cur.execute(dbUser)
