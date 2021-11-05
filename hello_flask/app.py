@@ -192,7 +192,6 @@ def getBooks():
 
 @app.route('/buyBook', methods=['POST']) #endpoint
 def buyBook():
-    print(request.form)
 
     authHeader = request.headers.get('Authorization')
 
@@ -200,7 +199,7 @@ def buyBook():
 
     print(tokenVal)
 
-    book = request.currentBook
+    book = request.form['Book']
 
     print(book)
 

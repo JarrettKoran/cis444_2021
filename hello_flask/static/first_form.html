@@ -64,7 +64,7 @@
         $.ajax({
           type: "POST",
           url: "/buyBook",
-          data: {currentBook: currentBook},
+          data: {Book: currentBook},
           headers: {Authorization: localStorage.getItem('token')},
           success: function(temp) {
             alert('Book Bought');
