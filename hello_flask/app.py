@@ -195,7 +195,7 @@ def getBooks():
 def decodeToken(token):
     print('in decode token')
 
-    decoded = jwt.decode(token, JWT_SECRET, algorithm=['HS256'])
+    decoded = jwt.decode(token, JWT_SECRET, algorithms=['HS256'])
     tStr = decoded.get('username')
     return tStr
 
@@ -206,6 +206,8 @@ def checkToken(token):
 
     tStr = decodeToken(token)
     cur = global_db_con.cursor()
+
+    print(token)
 
     dbUser = "SELECT EXISTS (SELECT username FROM users WHERE username =')"
     dbUser += tStr
