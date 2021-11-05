@@ -176,7 +176,7 @@ def addUser():
     sub = "INSERT INTO users (username, password) VALUES ('"
     sub += str(tempU)
     sub += "','"
-    sub += str(saltyBoi)
+    sub += str(saltyBoi.decode('utf-8'))
     sub += "');"
 
     print(sub)
