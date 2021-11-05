@@ -99,7 +99,7 @@ def hellodb():
 
 
 #Assignment 3
-@app.route('/authUser', methods=[POST])#endpoint
+@app.route('/authUser', methods=['POST'])#endpoint
 def authUser():
     print(request.form)
     print('=============')
@@ -210,6 +210,6 @@ def checkToken(authToken):
     if x[0] == True:
         return True
     return False
-    
+
 
 app.run(host='0.0.0.0', port=80)
