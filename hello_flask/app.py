@@ -208,7 +208,7 @@ def checkToken(token):
     tStr = decodeToken(token)
     cur = global_db_con.cursor()
 
-    print(token)
+    print(tStr)
 
     dbUser = "SELECT EXISTS (SELECT username FROM users WHERE username =')"
     dbUser += tStr
