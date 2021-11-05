@@ -105,7 +105,7 @@ def authUser():
     print('=============')
 
     cur = global_db_con.cursor()
-    uNameString = "select password from users where username ='"
+    uNameString = "SELECT password FROM users WHERE username ='"
     uNameString += request.form['uname']
     uNameString += "';"
 
@@ -147,13 +147,13 @@ def getBooks():
     print('JWT Valid')
 
     cur = global_db_con.cursor()
-    book_nameReq = 'select name from books;'
+    book_nameReq = 'SELECT name FROM books;'
     cur.execute(book_nameReq)
     book_nameResp = cur.fetchall()
 
     print(book_nameResp)
 
-    book_priceReq = 'select price from books;'
+    book_priceReq = 'SELECT price FROM books;'
     cur.execute(book_priceReq)
     book_priceResp = cur.fetchall()
 
@@ -173,7 +173,7 @@ def addUser():
     print(tempU)
     print(saltyBoi.decode('utf-8'))
 
-    sub = "insert into users(username, password) values('"
+    sub = "INSERT INTO users (username, password) VALUES ('"
     sub += str(tempU)
     sub += "','"
     sub += str(tempP)
@@ -198,9 +198,9 @@ def checkToken(authToken):
     tokenStr = decodeToken(authToken)
     cur = global_db_con.cursor()
 
-    dbUser = "select exists (select username from users where username =')"
+    dbUser = "SELECT EXISTS (SELECT username FROM users WHERE username =')"
     dbUser += tokenStr
-    dbUser += "' limit 1);"
+    dbUser += "' LIMIT 1);"
 
     cur.execute(dbUser)
     x = cur.fetchone()
