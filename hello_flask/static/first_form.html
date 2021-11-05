@@ -11,7 +11,7 @@
     //      $('#Login').click(loginSubmit);
     //  });
 
-      function loginSubmit() {
+      function login() {
           alert('Submitting Login Form');
           $.ajax({
             type: "POST",
@@ -96,7 +96,7 @@
     				<input type="text" id="uname" name="uname" value="Username"><br>
     			<label for="pword">Password:</label><br>
     				<input type="password" id="pword" name="pword" value="password"><br><br>
-            <input type="button" value="Login" id="Login" onclick="return loginSubmit();">
+            <input type="button" value="Login" id="Login" onclick="return login();">
     			  <input type="button" value="SignUp" onclick="return signupSwap();">
 		    </form>
 	    </div>
