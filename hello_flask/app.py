@@ -176,7 +176,7 @@ def addUser():
     sub = "INSERT INTO users (username, password) VALUES ('"
     sub += str(tempU)
     sub += "','"
-    sub += str(tempP)
+    sub += str(saltyBoi)
     sub += "');"
 
     print(sub)
