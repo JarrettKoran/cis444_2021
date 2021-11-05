@@ -210,7 +210,7 @@ def checkToken(token):
 
     print(tStr)
 
-    dbUser = "SELECT EXISTS (SELECT username FROM users WHERE username =')"
+    dbUser = "SELECT EXISTS (SELECT username FROM users WHERE username ='"
     dbUser += tStr
     dbUser += "' LIMIT 1);"
 
