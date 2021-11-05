@@ -8,7 +8,7 @@
 	<script>
 
       $(document).ready(function() {
-          $('#login').click(loginSubmit);
+          $('#Login').click(loginSubmit);
       });
 
       function loginSubmit() {
@@ -24,7 +24,7 @@
                 localStorage.clear()
                 alert(temp.jwt);
                 localStorage.setItem('token',temp.jwt);
-                
+
                 $('#login').hide();
                 $('#books').show();
                 populateBooks();
