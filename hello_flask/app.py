@@ -168,7 +168,7 @@ def getBooks():
     print('============')
     print(decoded.get('username'))
     print('============')
-    print(decoded.get('Jarrett'))
+    print(decoded.get('password'))
 
     if tokenVal == False:
         return json_response(status='404', msg='Invalid JWT Token')
@@ -214,11 +214,15 @@ def checkToken(token):
     cur.execute(dbUser)
     x = cur.fetchone()
 
+    print('x is ')
     print(x[0])
 
-    if x[0] == True:
+    if x[0]:
+        print('token valid')
         return True
-    return False
+    else:
+        print('token invalid')
+        return False
 
 
 app.run(host='0.0.0.0', port=80)
