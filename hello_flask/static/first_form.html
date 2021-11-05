@@ -22,18 +22,18 @@
                 alert(temp.status + ' ' + temp.msg);
               else {
                 localStorage.clear()
-                alert(temp.jwt);
+                //alert(temp.jwt);
                 localStorage.setItem('token',temp.jwt);
 
-                hideLogin();
-                showBooks();
-                populateBooks();
+                $('#login').hide();
+                $('#books').show();
+                getBooks();
               }
             }
           });
       }
 
-      function populateBooks() {
+      function getBooks() {
         $.ajax({
           type: "GET",
           url: "/getBooks",
@@ -53,16 +53,8 @@
       }
 
 
-      function hideLogin() {
-        $('#login').hide();
-      }
-
-      function() {
-        $('#books').show();
-      }
-
       function signupSwap() {
-        hideLogin();
+        $('#login').hide();
         $('#signup').show();
       }
 
