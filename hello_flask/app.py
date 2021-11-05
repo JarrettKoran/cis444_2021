@@ -217,9 +217,9 @@ def buyBook():
 
     print(cart)
 
-    #cur = global_db_con.cursor()
-    #cur.execute(cart)
-    #global_db_con.commit()
+    cur = global_db_con.cursor()
+    cur.execute(cart)
+    global_db_con.commit()
 
     return json_response(status="good")
 
