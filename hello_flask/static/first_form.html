@@ -49,7 +49,8 @@
               alert(temp.bookTitles.length)
               for(var i=0; i<temp.bookTitles.length;i++) {
 
-                $('#theShelf').append($('<option>', {value:temp.bookTitles[i], text:'Title: '+temp.bookTitles[i]+' Price: €' + data.bookPrices[i]}));
+                $('#theShelf').append($('<option>',{value: temp.bookTitles[i],text: 'Title: ' + temp.bookTitles[i] + ' Price: ¥' + temp.bookPrices[i]}));
+
                 alert(i);
               }
             }
