@@ -166,9 +166,9 @@ def getBooks():
     tokenVal = checkToken(authHeader)
 
     print('============')
-    print(decoded.get('username'))
-    print('============')
-    print(decoded.get('password'))
+    #print(decoded.get('username'))
+    #print('============')
+    #print(decoded.get('password'))
 
     if tokenVal == False:
         return json_response(status='404', msg='Invalid JWT Token')
@@ -197,6 +197,7 @@ def decodeToken(token):
 
     decoded = jwt.decode(token, JWT_SECRET, algorithms=['HS256'])
     tStr = decoded.get('username')
+
     return tStr
 
 def checkToken(token):
