@@ -214,6 +214,8 @@ def checkToken(token):
     dbUser += tStr
     dbUser += "' LIMIT 1);"
 
+    print(dbUser)
+
     cur.execute(dbUser)
     x = cur.fetchone()
 
