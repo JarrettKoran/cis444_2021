@@ -2,7 +2,7 @@ from flask import Flask,render_template,request
 from flask_json import FlaskJSON, JsonError, json_response, as_json
 import jwt
 
-import datetime
+from datetime import date
 import bcrypt
 
 
