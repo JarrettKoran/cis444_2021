@@ -176,7 +176,7 @@ def getBooks():
     print('JWT Valid')
 
     cur = global_db_con.cursor()
-    book_nameReq = 'SELECT name FROM books;'
+    book_nameReq = 'SELECT title FROM books;'
     cur.execute(book_nameReq)
     book_nameResp = cur.fetchall()
 
