@@ -25,8 +25,8 @@
                 alert(temp.jwt);
                 localStorage.setItem('token',temp.jwt);
 
-                $('#Login').hide();
-                $('#books').show();
+                hideLogin();
+                showBooks();
                 populateBooks();
               }
             }
@@ -37,19 +37,37 @@
         $.ajax({
           type: "GET",
           url: "/getBooks",
+          headers: {Authorization: localStorage.getItem('token')},
           success: function(temp) {
             alert('Success');
+            if(temp.jwt == null) {
+              alert(temp.status + '' + temp.msg);
+              window.location.reload();
+            } else {
+              for(var i=0; i<temp.bookNames.length;i++) {
+                $('#theShelf').append($('<option>', {value: data.bookNames[i],text:'Title: '+temp.bookNames[i]+' Price: €' + data.bookPrices[i],}));
+              }
+            }
           }
         });
       }
 
-      function signupSwap() {
+
+      function hideLogin() {
         $('#login').hide();
+      }
+
+      function() {
+        $('#books').show();
+      }
+
+      function signupSwap() {
+        hideLogin();
         $('#signup').show();
       }
 
-      function addNewUser() {
-        alert("New User Added");
+      function newUser() {
+        alert("User Added");
         return true;
       }
 
@@ -68,12 +86,12 @@
 	    </div>
 
       <div id="signup" style="display:none">
-	    	<form action="/addUser" method="post">
+	    	<form action="/newUser" method="post">
     			<label for="newUser">Enter a Username:</label><br>
     				<input type="text" id="newUser" name="newUser" value="Username"><br>
     			<label for="newPass">Password:</label><br>
     				<input type="password" id="newPass" name="newPass" value="password"><br><br>
-    			 <input type="submit" value="Submit" onclick="return addNewUser();">
+    			 <input type="submit" value="Submit" onclick="return newUser();">
 		    </form>
 	    </div>
 

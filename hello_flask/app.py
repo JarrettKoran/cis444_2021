@@ -161,8 +161,8 @@ def getBooks():
 
     return json_response(jwt=authHeader, bookNames=book_nameResp, bookPrices=book_priceResp)
 
-@app.route('/addUser', methods=['POST']) #endpoint
-def addUser():
+@app.route('/newUser', methods=['POST']) #endpoint
+def newUser():
     print(request.form)
 
     tempU = request.form['newUser']
