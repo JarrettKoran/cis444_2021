@@ -45,6 +45,7 @@
               window.location.reload();
             } else {
               alert(temp.bookTitles[0])
+              alert(temp.bookPrices[0])
               alert(temp.bookTitles.length)
               for(var i=0; i<temp.bookTitles.length;i++) {
                 alert(i);
@@ -92,9 +93,9 @@
 
 	    <div id="books" style="display:none">
 		    <h1>Available Titles:</h1>
-		    <select name="theShelf" id="theShelf">
 
-        </select>
+		    <select name="theShelf" id="theShelf"></select>
+
 	    </div>
 
     </body>
