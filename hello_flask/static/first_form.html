@@ -44,6 +44,7 @@
               alert(temp.status + '' + temp.msg);
               window.location.reload();
             } else {
+              alert(temp.bookTitles[0])
               for(var i=0; i<temp.bookTitles.length;i++) {
                 $('#theShelf').append($('<option>', {value:temp.bookTitles[i], text:'Title: '+temp.bookTitles[i]+' Price: €' + data.bookPrices[i]}));
               }

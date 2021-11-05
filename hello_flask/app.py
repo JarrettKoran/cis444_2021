@@ -178,7 +178,7 @@ def getBooks():
     cur = global_db_con.cursor()
     book_titleReq = 'SELECT title FROM books;'
     cur.execute(book_titleReq)
-    book_nameResp = cur.fetchall()
+    book_titleResp = cur.fetchall()
 
     print(book_titleResp)
 
