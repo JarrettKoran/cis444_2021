@@ -7,9 +7,9 @@
 
 	<script>
 
-      $(document).ready(function() {
-          $('#Login').click(loginSubmit);
-      });
+    //  $(document).ready(function() {
+    //      $('#Login').click(loginSubmit);
+    //  });
 
       function loginSubmit() {
           alert('Submitting Login Form');
@@ -96,7 +96,7 @@
     				<input type="text" id="uname" name="uname" value="Username"><br>
     			<label for="pword">Password:</label><br>
     				<input type="password" id="pword" name="pword" value="password"><br><br>
-            <input type="button" value="Login" id="Login">
+            <input type="button" value="Login" id="Login" onclick="return loginSubmit();">
     			  <input type="button" value="SignUp" onclick="return signupSwap();">
 		    </form>
 	    </div>
