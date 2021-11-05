@@ -7,9 +7,6 @@
 
 	<script>
 
-    //  $(document).ready(function() {
-    //      $('#Login').click(loginSubmit);
-    //  });
 
       function login() {
           alert('Submitting Login Form');
@@ -61,6 +58,8 @@
       function buyBook() {
 
         var currentBook = document.getElementById("theShelf");
+        currentBook = currentBook.options[currentBook.selectedIndex].value;
+        alert(currentBook);
 
         $.ajax({
           type: "POST",
