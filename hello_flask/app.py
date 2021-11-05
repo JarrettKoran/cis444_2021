@@ -176,11 +176,11 @@ def getBooks():
     print('JWT Valid')
 
     cur = global_db_con.cursor()
-    book_nameReq = 'SELECT title FROM books;'
-    cur.execute(book_nameReq)
+    book_titleReq = 'SELECT title FROM books;'
+    cur.execute(book_titleReq)
     book_nameResp = cur.fetchall()
 
-    print(book_nameResp)
+    print(book_titleResp)
 
     book_priceReq = 'SELECT price FROM books;'
     cur.execute(book_priceReq)
@@ -188,7 +188,7 @@ def getBooks():
 
     print(book_priceResp)
 
-    return json_response(jwt=authHeader, bookNames=book_nameResp, bookPrices=book_priceResp)
+    return json_response(jwt=authHeader, bookTitles=book_titleResp, bookPrices=book_priceResp)
 
 
 
