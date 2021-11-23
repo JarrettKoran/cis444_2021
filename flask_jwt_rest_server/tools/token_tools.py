@@ -9,4 +9,3 @@ def create_token(token_data):
     token_data['iat'] = datetime.datetime.utcnow()
 
     return jwt.encode( token_data , g.secrets['JWT'],  algorithm="HS256")
-

@@ -7,5 +7,7 @@ from tools.logging import logger
 def handle_request():
     logger.debug("Get Books Handle Request")
 
-    return json_response( token = create_token(  g.jwt_data ) , books = {})
+    titleRes = requestBookInfo("title")
+    priceRes = requestBookInfo("price")
 
+    return json_response( token = create_token(  g.jwt_data ),bookTitle = titleRes, bookPrice = priceRes)

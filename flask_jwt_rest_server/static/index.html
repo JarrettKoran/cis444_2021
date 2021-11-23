@@ -1,56 +1,117 @@
 <!DOCTYPE html>
 <html>
     <head>
-	     <script src="https://code.jquery.com/jquery-3.6.0.js" 
+	     <script src="https://code.jquery.com/jquery-3.6.0.js"
 		     integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 	     <script src="/static/cis444.js"></script>
     </head>
     <body>
 
 	<script>
-		function send_form(){
-			$.post("/open_api/login", { "firstname":$('#fname').val(), "password":$('#password').val()},
-                       		function(data, textStatus) {
-					//this gets called when browser receives response from server
-					console.log(data.token);
-					//Set global JWT
-					jwt = data.token;
-					//make secure call with the jwt
-					get_books();
-				}, "json").fail( function(response) {
-					//this gets called if the server throws an error
-					console.log("error");
-					console.log(response);
-				});
-			return false;
-		}
 
-		function get_books(){
-			 //make secure call with the jwt
-			secure_get_with_token("/secure_api/get_books", {} , function(data){
-					console.log("got books"); 
-					console.log(data); 
-					$('#buybook').show();
-					},
-                                                function(err){ console.log(err) });
-		}
-                function buy_book(book_id){
-                         //make secure call with the jwt
-                        secure_get_with_token("/secure_api/get_books", {"book_id" : book_id} , function(data){console.log("got books"); console.log(data)},
-                                                function(err){ console.log(err) });
-                }
+    var here;
+
+    $(document).ready(function(){
+			$("#Login").click(loginClicked);
+			$("#Signup").click(signupClicked);
+			$("#Purchase").click(purchaseClicked);
+		});
+
+    function signupSwap(){
+      $('#login').hide();
+      $('#signup').show();
+    }
+
+    function signup(){
+      $.ajax({
+        type: "POST",
+        url: "/open_api/SignUp"
+        data: $("#signupForm").serialize(),
+        success: function(temp){
+          $('#signup').hide();
+          getBooks();
+          here = temp.Username;
+        }
+      });
+    }
+
+    function login() {
+        alert('Submitting Login Form');
+        $.ajax({
+          type: "POST",
+          url: "/open_api/login",
+          data: $("#loginForm").serialize(),
+          success: function(temp, textStatus) {
+  					//this gets called when browser receives response from server
+  					console.log(data.token);
+            $('#login').hide();
+  					//Set global JWT
+  					jwt = data.token;
+  					//make secure call with the jwt
+  					getBooks();
+            here = temp.Username;
+          }, error: function(response) {
+             //this gets called if the server throws an error
+  					 console.log("error");
+  				 	 console.log(response);
+          }
+        });
+    }
+
+    function getBooks() {
+        secure_get_with_token("/secure_api/get_books",{}, function(temp) {
+          console.log("showing books");
+          console.log(temp);
+          $("#books").show();
+          for(int i = 0; i < temp.bookTitles.length; i++){
+            $("#theShelf").append($("<option>",{value:temp.bookTitles[i],text:'Title: '+ data.bookNames[i]+'; Price: $'+data.bookPrice[i]}));
+
+          }
+        }, function(error) {
+          console.log(error)
+        });
+    }
+
+    purchaseBooks() {
+      secure_post_with_token("/secure_api/purchase_book",{"thisUser": here,"bookTitle":$("#theShelf").val(),"clientDate":new Date($.now())},
+        function(temp){
+          alert("Book successfully purchased");
+        }, function(error){
+          console.log(error)
+      });
+    }
+
 
 	</script>
-            <div id="login">
-	    	<form >
-  			<label for="fname">First name:</label><br>
-  				<input type="text" id="fname" name="fname" value="John"><br>
-  			<label for="password">Password:</label><br>
-  				<input type="password" id="password" name="password" value="12212"><br><br>
-  			<input type="submit" value="Signup" onclick="return send_form();">
-		</form>
-	    </div>
-	    <button id="buybook" onclick="buy_book(1234)" style="display:none" >Buy Book</button>
+
+  <div id="login">
+    <form id="loginForm">
+      <label for="uname">Username:</label><br>
+        <input type="text" id="uname" name="uname" value="Username"><br>
+      <label for="pword">Password:</label><br>
+        <input type="password" id="pword" name="pword" value="password"><br><br>
+        <input type="button" value="Login" id="Login" onclick="return login();">
+        <input type="button" value="SignUp" onclick="return signupSwap();">
+    </form>
+  </div>
+
+  <div id="signup" style="display:none">
+    <form id="signupForm">
+      <label for="newUser">Enter a Username:</label><br>
+        <input type="text" id="newUser" name="newUser" value="Username"><br>
+      <label for="newPass">Password:</label><br>
+          <input type="password" id="newPass" name="newPass" value="password"><br><br>
+       <input type="button" value="Submit" id="SignUp">
+    </form>
+  </div>
+
+  <div id="books" style="display:none">
+    <h1>Available Titles:</h1>
+
+    <select name="theShelf" id="theShelf"></select>
+    <input type="button" value="Buy current title" onclick="return buyBook();">
+
+  </div>
+
     </body>
 </html>
-
