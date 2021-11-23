@@ -20,6 +20,7 @@
     function signupSwap(){
       $('#login').hide();
       $('#signup').show();
+      return true;
     }
 
     function signup(){
@@ -90,7 +91,7 @@
         <input type="text" id="uname" name="uname" value="Username"><br>
       <label for="pword">Password:</label><br>
         <input type="password" id="pword" name="pword" value="password"><br><br>
-        <input type="button" value="Login" id="Login" onclick="return login();">
+        <input type="button" value="Login" id="Login">
         <input type="button" value="SignUp" onclick="return signupSwap();">
     </form>
   </div>
