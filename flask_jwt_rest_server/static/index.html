@@ -14,7 +14,7 @@
     $(document).ready(function(){
 			$("#Login").click(login);
 			$("#Signup").click(signup);
-			$("#Purchase").click(purchaseBooks);
+			$("#BuyBook").click(purchaseBooks);
 		});
 
     function signup(){
@@ -25,7 +25,7 @@
         success: function(temp){
           $('#signup').hide();
           getBooks();
-          here = temp.Username;
+          here = temp.username;
         }
       });
     }
@@ -44,7 +44,7 @@
   					jwt = data.token;
   					//make secure call with the jwt
   					getBooks();
-            here = temp.Username;
+            here = temp.username;
           }, error: function(response) {
              //this gets called if the server throws an error
   					 console.log("error");
@@ -76,7 +76,7 @@
       });
     }
 
-    function swapInterface(){
+    function signupSwap(){
       $('#login').hide();
       $('#signup').show();
       return true;
@@ -91,7 +91,8 @@
       <label for="pword">Password:</label><br>
         <input type="password" id="pword" name="pword" value="password"><br><br>
         <input type="button" value="Login" id="Login">
-        <input type="button" value="SignUp" onclick="return swapInterface();">
+
+        <input type="button" value="SignUp" onclick="return signupSwap();">
     </form>
   </div>
 
@@ -109,7 +110,7 @@
     <h1>Available Titles:</h1>
 
     <select name="theShelf" id="theShelf"></select>
-    <input type="button" value="Buy current title" onclick="return buyBook();">
+    <input type="button" value="Buy current title" id="BuyBook">
 
   </div>
 
