@@ -20,7 +20,7 @@
     function signup(){
       $.ajax({
         type: "POST",
-        url: "/open_api/SignUp"
+        url: "/open_api/SignUp",
         data: $("#signupForm").serialize(),
         success: function(temp){
           $('#signup').hide();
