@@ -17,12 +17,6 @@
 			$("#Purchase").click(purchaseBooks);
 		});
 
-    function swapInterface(){
-      $('#login').hide();
-      $('#signup').show();
-      return true;
-    }
-
     function signup(){
       $.ajax({
         type: "POST",
@@ -82,6 +76,11 @@
       });
     }
 
+    function swapInterface(){
+      $('#login').hide();
+      $('#signup').show();
+      return true;
+    }
 
 	</script>
 
