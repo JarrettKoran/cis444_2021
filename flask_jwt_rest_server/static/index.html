@@ -58,9 +58,8 @@
           console.log("showing books");
           console.log(temp);
           $("#books").show();
-          for(int i = 0; i < temp.bookTitles.length; i++){
+          for(var i = 0; i < temp.bookTitles.length; i++){
             $("#theShelf").append($("<option>",{value:temp.bookTitles[i],text:'Title: '+ data.bookNames[i]+'; Price: $'+data.bookPrice[i]}));
-
           }
         }, function(error) {
           console.log(error)
