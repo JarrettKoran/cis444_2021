@@ -42,7 +42,7 @@ def hello():
 
 @app.route('/main') #endpoint
 def main1():
-    return render_template('first_form.html')
+    return render_template('first_form.html',img_url=IMGS_URL[CUR_ENV] )
 
 
 @app.route('/back',  methods=['GET']) #endpoint
