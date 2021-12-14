@@ -41,7 +41,7 @@ def hello():
     return render_template('hello.html',img_url=IMGS_URL[CUR_ENV] )
 
 @app.route('/main') #endpoint
-def hello():
+def main1():
     return render_template('first_form.html')
 
 
