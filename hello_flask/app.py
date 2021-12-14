@@ -40,10 +40,6 @@ def buy():
 def hello():
     return render_template('hello.html',img_url=IMGS_URL[CUR_ENV] )
 
-@app.route('/main') #endpoint
-def main1():
-    return render_template('first_form.html',img_url=IMGS_URL[CUR_ENV] )
-
 
 @app.route('/back',  methods=['GET']) #endpoint
 def back():
