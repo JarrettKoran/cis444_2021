@@ -279,6 +279,6 @@ def populateTable():
     exec(open('riotgames.py').read())
     returns = 12
 
-    return json_response(returns=summonerInformation)
+    return json_response(returns)
 
 app.run(host='0.0.0.0', port=80)
