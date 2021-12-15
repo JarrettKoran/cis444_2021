@@ -11,7 +11,10 @@ def summonerInfo(sumName):
     me = watcher.summoner.by_name(my_region, sumName)
     print(me)
 
-    print(me[7])
+    temp_file = json.dumps(me)
+
+    with open("my_file.json","w") as file:
+        file.write(temp_file)
 
 
     return (me)
