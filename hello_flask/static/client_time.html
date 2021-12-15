@@ -22,8 +22,8 @@
           url: "/searchSummoner",
           data: $("#form").serialize(),
           success: function(temp) {
-            if(temp.jwt == null)
-              alert(temp.status + ' ' + temp.msg);
+            if(temp.Summoner_Name == null)
+              alert("Invalid Summoner Name");
               window.location.reload();
             }
             else {
