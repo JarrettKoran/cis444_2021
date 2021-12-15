@@ -15,6 +15,13 @@ def summonerInfo(sumName):
     rankedStats = watcher.league.by_summoner(my_region,  summoner['id'])
     print(rankedStats)
 
+    print(summoner['summonerLevel'])
+    print(rankedStats['queueType'])
+    print(rankedStats['tier'])
+    print(rankedStats['rank'])
+    print(rankedStats['leaguePoints'])
+    print(rankedStats['wins'])
+    print(rankedStats['losses'])
 
 
     return (12)
