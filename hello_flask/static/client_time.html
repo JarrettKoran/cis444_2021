@@ -44,7 +44,7 @@
         alert($('#sumName').val())
 
         $.ajax({
-          type: "GET",
+          type: "POST",
           url: "/populateTable",
           data: {'sumName':$('#sumName').val()},
           success: function(temp) {
@@ -53,7 +53,6 @@
               alert("Invalid Summoner Name");
             }
             else {
-              window.location.reload();
 
               $('#summonerInfo').show();
 
