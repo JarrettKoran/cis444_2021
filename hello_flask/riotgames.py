@@ -11,7 +11,10 @@ def summonerInfo(sumName):
     me = watcher.summoner.by_name(my_region, sumName)
     print(me)
 
-    print(me["summonerLevel"])
+    res = []
+    key in me.keys():
+        res.append(me[key])
 
+    print(str(res))
 
     return (me)
