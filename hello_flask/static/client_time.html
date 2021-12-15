@@ -5,9 +5,9 @@
 	<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     </head>
     <body>
-<!--
+
 	<div style="background-image: url(https://www.denofgeek.com/wp-content/uploads/2021/09/book-of-boba-fett-release-date-trailer-cast-plot.jpg?fit=1688%2C940);">
- -->
+
 	    <h1 id="mytime"></h1>
 	<script>
 
@@ -27,6 +27,8 @@
               window.location.reload();
             else {
               window.location.reload();
+
+              $('#summonerInfo').show();
 
               $('#sumInfo').append($('<li>',{value: temp.Summoner_Name,text: 'Summoner Name: ' + temp.Summoner_Name}));
               $('#sumInfo').append($('<li>',{value: temp.Summoner_Level,text: 'Summoner Level: ' + temp.Summoner_Level}));
@@ -71,7 +73,7 @@
           <input type="button" value="Search" id="Search" onclick="return sumSearch();">
     </form>
 
-    <div id="summonerInfo">
+    <div id="summonerInfo" style="display:none">
       <label for="sumTable">Summoner:</label><br>
         <ul id='sumInfo'>
 
