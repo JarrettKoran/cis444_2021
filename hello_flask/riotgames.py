@@ -12,9 +12,7 @@ def summonerInfo(sumName):
     me = str(me)
     print(me)
 
-    json_sumLevel =  me["summonerLevel"]
-
-    print(str(json_sumLevel))
+    print(str(me["summonerLevel"]))
 
 
     return (me)
