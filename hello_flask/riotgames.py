@@ -15,6 +15,6 @@ def summonerInfo(sumName):
     rankedStats = watcher.league.by_summoner(my_region,  summoner['id'])
     print(rankedStats)
 
-    allInfo = [summoner,rankedStats]
 
-    return (allInfo)
+
+    return ("working")
