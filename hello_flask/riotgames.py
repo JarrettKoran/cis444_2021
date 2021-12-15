@@ -11,8 +11,7 @@ def summonerInfo(sumName):
     me = watcher.summoner.by_name(my_region, sumName)
     print(me)
 
-    result = json.loads(me)
-    print(result['name']['level'])
+    print(me[7])
 
 
     return (me)
