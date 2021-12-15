@@ -5,6 +5,7 @@ import jwt
 from datetime import date
 import bcrypt
 
+import requests
 
 from db_con import get_db_instance, get_db
 
@@ -263,8 +264,40 @@ def checkToken(token):
         return False
 
 #finalassignment
+@app.route('/searchSummoner', methods=['GET']) #endpoint
+def sumSearch():
 
+    sumName = request.form("sName")
+    region = request.form("region")
 
+    print sumName
+    print region
 
+    URL = "https://na1.api.riotgames.com/lol/summoner/v4/summoners/by-name/" + sumName + "?api_key=RGAPI-166f7c8a-76f0-41d5-a269-c3fbddc4cc48"
+
+    response = request.get(URL)
+    respJSON = response.json()
+
+    sumLevel = respJSON('summonerLevel')
+    sumLevel = str(sumLevel)
+
+    ID = respJSON('id')
+    ID = str(ID)
+
+    URL2 = "https://na1.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-summoner/" + ID + "?api_key=RGAPI-5f73779d-d12c-45f1-ac61-788ba13a8409"
+
+    reponse2 = request.get(URL2)
+    respJSON2 = response.json()
+
+    highestChamp = respJSON2(0)("championId")
+    highestChamp = str(highestChamp)
+
+    champLevel = respJSON2(0)("championLevel")
+    champLevel = str(champLevel)
+
+    champMastery = respJSON2(0)("championPoints")
+    champMastery = str(champMastery)
+
+    return json_response(sumName=Summoner_Name, sumLevel=Summoner_Level, highestChamp = Highest_Champion, champLevel =  Champion_Level, champMastery = Champion_Mastery)
 
 app.run(host='0.0.0.0', port=80)
