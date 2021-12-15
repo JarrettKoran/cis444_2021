@@ -275,9 +275,8 @@ def populateTable():
 
     print(sumName)
 
-    #returns = riotgames.findSummoner(sumName)
-    exec(open('riotgames.py').read())
-    returns = 12
+    returns = riotgames.summonerInfo(sumName)
+    
 
     return json_response(returns)
 
