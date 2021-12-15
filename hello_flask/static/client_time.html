@@ -5,12 +5,16 @@
 	<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     </head>
     <body>
-
-	<div style="background-image: url(https://www.denofgeek.com/wp-content/uploads/2021/09/book-of-boba-fett-release-date-trailer-cast-plot.jpg?fit=1688%2C940);">	
-
+<!--
+	<div style="background-image: url(https://www.denofgeek.com/wp-content/uploads/2021/09/book-of-boba-fett-release-date-trailer-cast-plot.jpg?fit=1688%2C940);">
+ -->
 	    <h1 id="mytime"></h1>
 	<script>
-	
+
+    var images = ['viego.jpg', 'kaisa.jpg', 'jhin.jpg', 'lux.jpg', 'sett.jpg'];
+    $('html').css({'background-image': 'url(images/' + images[Math.floor(Math.random() * images.length)] + ')'});
+
+/*
 		var countDown = new Date("Dec 29, 2021 12:00:00").getTime();
 
 		var x = setInterval(function() {
@@ -35,6 +39,79 @@
 
 
 		setInterval( function(){ $('#mytime').html( "Time is " + new Date());}, 500);
+    */
+    function sumSearch() {
+        alert('Submitting Search Form');
+        $.ajax({
+          type: "POST",
+          url: "/searchSummoner",
+          data: $("#form").serialize(),
+          success: function(temp) {
+            if(temp.jwt == null)
+              alert(temp.status + ' ' + temp.msg);
+            else {
+              localStorage.clear()
+              //alert(temp.jwt);
+              localStorage.setItem('token',temp.jwt);
+
+              populateTable();
+            }
+          }
+        });
+    }
+
+    function populateTable() {
+      $.ajax({
+        type: "GET",
+        url: "/populateTable",
+        headers: {Authorization: localStorage.getItem('token')},
+        success: function(temp) {
+          alert('Success');
+          if(temp.jwt == null) {
+            alert(temp.status + '' + temp.msg);
+            window.location.reload();
+          } else {
+            //alert(temp.bookTitles[0])
+            //alert(temp.bookPrices[0])
+            //alert(temp.bookTitles.length)
+              $('#sName').append($('<option>',{value: temp.bookTitles[i],text: 'Title: ' + temp.bookTitles[i] + ' Price: ¥' + temp.bookPrices[i]}));
+
+              //alert(i);
+            
+          }
+        }
+      });
+    }
+
 	</script>
+
+    <div id="login">
+      <form id="form">
+        <label for="sumName">Enter A Summoner Name:</label><br>
+          <input type="text" id="sumName" name="sumName" value="Summoner Name"><br>
+          <input type="button" value="Search" id="Search" onclick="return sumSearch();">
+    </form>
+
+    <div id="sumInfo">
+      <label for="sumTable">Summoner:</label><br>
+        <table>
+          <tr>
+            <th>Summoner Name</th>
+            <th>Summoner Rank</th>
+            <th>Summoner Win Rate</th>
+          </tr>
+          <tr>
+            <td id ="sName"></td>
+            <td>Maria Anders</td>
+            <td>Germany</td>
+          </tr>
+          <tr>
+            <td>Centro comercial Moctezuma</td>
+            <td>Francisco Chang</td>
+            <td>Mexico</td>
+          </tr>
+      </table>
+    </div>
+
     </body>
 </html>
