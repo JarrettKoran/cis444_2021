@@ -8,12 +8,11 @@ def summonerInfo(sumName):
     watcher = LolWatcher(api_key)
     my_region = 'na1'
 
-    me = watcher.summoner.by_name(my_region, sumName)
-    print(me)
+    summoner = watcher.summoner.by_name(my_region, sumName)
+    print(summoner)
 
+    rankedStats = watcher.league.by_summoner(my_region,  summoner['id'])
+    print(rankedStats)
 
-    for i in me:
-        if i == 'summonerLevel':
-            print(me.get(i))
 
     return (me)
