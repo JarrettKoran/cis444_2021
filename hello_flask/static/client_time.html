@@ -41,12 +41,11 @@
         $.ajax({
           type: "GET",
           url: "/populateTable",
-          data: {'sumName':$('#sumName')},
+          data: 'sumName':$('#sumName').val(),
           success: function(temp) {
             alert('Success');
             if(temp.Summoner_Name == null) {
               alert("Invalid Summoner Name");
-              window.location.reload();
             }
             else {
               window.location.reload();
