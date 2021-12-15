@@ -9,7 +9,6 @@ def summonerInfo(sumName):
     my_region = 'na1'
 
     me = watcher.summoner.by_name(my_region, sumName)
-    me = str(me)
     print(me)
 
     print(me["summonerLevel"])
