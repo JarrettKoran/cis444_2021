@@ -41,7 +41,6 @@
         $.ajax({
           type: "GET",
           url: "/populateTable",
-          headers: {Authorization: "authorized"},
           data: {'sumName':$('#sumName')},
           success: function(temp) {
             alert('Success');
