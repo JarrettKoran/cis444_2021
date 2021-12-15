@@ -264,17 +264,6 @@ def checkToken(token):
         return False
 
 #finalassignment
-@app.route('/searchSummoner', methods=['POST']) #endpoint
-def searchSummoner():
-
-    print("insumsearchpy")
-
-    sumName = request.form("sName")
-
-    populateTable(sumName)
-
-return json_response(status="good")
-
 
 @app.route('/populateTable', methods=['GET']) #endpoint
 def populateTable(sumName):
