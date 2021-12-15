@@ -12,6 +12,12 @@ def summonerInfo(sumName):
     print(me)
 
 
+    print(me.get(0))
+    print(me.get(1))
+    print(me.get(2))
+    print(me.get(3))
+    print(me.get(4))
+    print(me.get(5))
     print(me.get(6))
 
     return (me)
