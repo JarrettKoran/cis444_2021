@@ -1,6 +1,7 @@
 from riotwatcher import LolWatcher, ApiError
 import pandas as pd
 import json
+from flask_json import FlaskJSON, JsonError, json_response, as_json
 
 
 def summonerInfo(sumName):
