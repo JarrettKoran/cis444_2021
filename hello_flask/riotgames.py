@@ -8,7 +8,7 @@ def summonerInfo(sumName):
     watcher = LolWatcher(api_key)
     my_region = 'na1'
 
-    me = watcher.summoner.by_name(my_region, sumName).json()
+    me = watcher.summoner.by_name(my_region, sumName)
     print(me)
 
     json_sumLevel =  me['summonerLevel']
