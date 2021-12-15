@@ -268,9 +268,9 @@ def checkToken(token):
 @app.route('/populateTable', methods=['GET']) #endpoint
 def populateTable():
 
-    print(request.form)
+    print(request.args)
 
-    sumName = request.form['sumName']
+    sumName = request.args['sumName']
 
     print(sumName)
 
