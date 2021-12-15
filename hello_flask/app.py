@@ -264,15 +264,7 @@ def checkToken(token):
         return False
 
 #finalassignment
-
-@app.route('/populateTable', methods=['GET']) #endpoint
-def populateTable():
-
-    print(request.args)
-
-    sumName = request.args['sName']
-
-    print(sumName)
+def findSummoner(sumName):
 
     URL = "https://na1.api.riotgames.com/lol/summoner/v4/summoners/by-name/" + sumName + "?api_key=RGAPI-166f7c8a-76f0-41d5-a269-c3fbddc4cc48"
 
@@ -299,6 +291,22 @@ def populateTable():
     champMastery = respJSON2(0)("championPoints")
     champMastery = str(champMastery)
 
-    return json_response(sumName=Summoner_Name, sumLevel=Summoner_Level, highestChamp = Highest_Champion, champLevel =  Champion_Level, champMastery = Champion_Mastery)
+    sumInfo = [sumName, sumLevel,highestChamp,champLevel,champMastery]
+
+    return sumInfo
+
+
+@app.route('/populateTable', methods=['GET']) #endpoint
+def populateTable():
+
+    print(request.args)
+
+    sumName = request.args['sName']
+
+    print(sumName)
+
+    returns = findSummoner(sumName)
+
+    return json_response(returns=summonerInformation)
 
 app.run(host='0.0.0.0', port=80)
