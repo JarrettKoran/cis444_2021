@@ -15,4 +15,4 @@ def summonerInfo(sumName):
     print(rankedStats)
 
 
-    return (summoner)
+    return json_response(sumInfo=summoner)
