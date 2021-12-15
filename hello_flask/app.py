@@ -277,6 +277,6 @@ def populateTable():
 
     value1 = riotgames.summonerInfo(sumName)
 
-    return json_response(value1)
+    return json_response(data=value1)
 
 app.run(host='0.0.0.0', port=80)
