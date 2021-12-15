@@ -265,7 +265,7 @@ def checkToken(token):
 
 #finalassignment
 
-@app.route('/populateTable', methods=['POST']) #endpoint
+@app.route('/populateTable', methods=['GET']) #endpoint
 def populateTable():
 
     print(request.form)

@@ -44,7 +44,7 @@
         alert($('#sumName').val())
 
         $.ajax({
-          type: "POST",
+          type: "GET",
           url: "/populateTable",
           data: {'sumName':$('#sumName').val()},
           success: function(temp) {
