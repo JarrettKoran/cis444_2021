@@ -264,21 +264,29 @@ def checkToken(token):
         return False
 
 #finalassignment
-@app.route('/searchSummoner', methods=['GET']) #endpoint
-def sumSearch():
+@app.route('/searchSummoner', methods=['POST']) #endpoint
+def searchSummoner():
 
     print("insumsearchpy")
 
     sumName = request.form("sName")
-    region = request.form("region")
+
+    populateTable(sumName)
+
+return json_response(status="good")
+
+
+@app.route('/populateTable', methods=['GET']) #endpoint
+def populateTable(sumName):
+
+    print("backend")
 
     print(sumName)
-    print(region)
 
     URL = "https://na1.api.riotgames.com/lol/summoner/v4/summoners/by-name/" + sumName + "?api_key=RGAPI-166f7c8a-76f0-41d5-a269-c3fbddc4cc48"
 
-    response = request.get(URL)
-    respJSON = response.json()
+    resp = request.get(URL)
+    respJSON = resp.json()
 
     sumLevel = respJSON('summonerLevel')
     sumLevel = str(sumLevel)
@@ -288,8 +296,8 @@ def sumSearch():
 
     URL2 = "https://na1.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-summoner/" + ID + "?api_key=RGAPI-5f73779d-d12c-45f1-ac61-788ba13a8409"
 
-    reponse2 = request.get(URL2)
-    respJSON2 = response.json()
+    resp2 = request.get(URL2)
+    respJSON2 = resp2.json()
 
     highestChamp = respJSON2(0)("championId")
     highestChamp = str(highestChamp)

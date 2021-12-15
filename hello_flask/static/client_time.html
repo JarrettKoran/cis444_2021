@@ -14,15 +14,37 @@
     var images = ['viego.jpg', 'kaisa.jpg', 'jhin.jpg', 'lux.jpg', 'sett.jpg'];
     $('html').css({'background-image': 'url(images/' + images[Math.floor(Math.random() * images.length)] + ')'});
 
-
+/*
     function sumSearch() {
         alert('Submitting Search Form');
         $.ajax({
-          type: "GET",
+          type: "POST",
           url: "/searchSummoner",
           data: $("#form").serialize(),
           success: function(temp) {
             alert ("In sumSearch")
+            if(temp.jwt == null)
+              alert(temp.status + ' ' + temp.msg);
+            else {
+              localStorage.clear()
+              //alert(temp.jwt);
+              localStorage.setItem('token',temp.jwt);
+
+              $('#sumInfo').show();
+              popTable();
+            }
+          }
+        });
+    }
+*/
+      function popTable() {
+        $.ajax({
+          type: "GET",
+          url: "/populateTable",
+          headers: {Authorization: "authorized"},
+          data: {'sumName':$('#sumName')},
+          success: function(temp) {
+            alert('Success');
             if(temp.Summoner_Name == null) {
               alert("Invalid Summoner Name");
               window.location.reload();
@@ -42,15 +64,13 @@
         });
       }
 
-
-
 	</script>
 
-    <div id="sumName">
+    <div id="summoner">
       <form id="form">
         <label for="sumName">Enter A Summoner Name:</label><br>
           <input type="text" id="sumName" name="sumName" value="Summoner Name"><br>
-          <input type="button" value="Search" id="Search" onclick="return sumSearch();">
+          <input type="button" value="Search" id="Search" onclick="return popTable();">
     </form>
 
     <div id="summonerInfo" style="display:none">
