@@ -267,11 +267,13 @@ def checkToken(token):
 @app.route('/searchSummoner', methods=['GET']) #endpoint
 def sumSearch():
 
+    print("insumsearchpy")
+
     sumName = request.form("sName")
     region = request.form("region")
 
     print(sumName)
-    print(region) 
+    print(region)
 
     URL = "https://na1.api.riotgames.com/lol/summoner/v4/summoners/by-name/" + sumName + "?api_key=RGAPI-166f7c8a-76f0-41d5-a269-c3fbddc4cc48"
 
