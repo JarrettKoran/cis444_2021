@@ -9,8 +9,4 @@ def summonerInfo(sumName):
     my_region = 'na1'
 
     me = watcher.summoner.by_name(my_region, sumName)
-    with open(me) as json_file:
-        data = json.load(json_file)
-    print(data)
-
-    #print(me)
+    print(me)
