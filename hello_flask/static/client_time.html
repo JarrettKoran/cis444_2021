@@ -25,6 +25,7 @@
             if(temp.jwt == null)
               alert(temp.status + ' ' + temp.msg);
               window.location.reload();
+            }
             else {
               window.location.reload();
 
@@ -35,15 +36,11 @@
               $('#sumInfo').append($('<li>',{value: temp.Highest_Champion,text: 'Highest Mastery Champion: ' +
               temp.Highest_Champion + ' Mastery Level: ' + temp.Champion_Level + ' Mastery Points: ' + temp.Champion_Mastery}));
 
-
-            }
           }
         });
     }
 
-    function searching(){
-      sumSearch();
-    }
+
 
 
 	</script>
@@ -52,7 +49,7 @@
       <form id="form">
         <label for="sumName">Enter A Summoner Name:</label><br>
           <input type="text" id="sumName" name="sumName" value="Summoner Name"><br>
-          <input type="button" value="Search" id="Search" onclick="return searching();">
+          <input type="button" value="Search" id="Search" onclick="return sumSearch();">
     </form>
 
     <div id="summonerInfo" style="display:none">
