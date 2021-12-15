@@ -12,7 +12,7 @@ def summonerInfo(sumName):
     me = str(me)
     print(me)
 
-    print(str(me["summonerLevel"]))
+    print(me["summonerLevel"])
 
 
     return (me)
