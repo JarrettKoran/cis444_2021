@@ -17,4 +17,4 @@ def summonerInfo(sumName):
 
 
 
-    return ("working")
+    return (12)
