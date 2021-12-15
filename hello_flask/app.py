@@ -274,7 +274,7 @@ def populateTable():
     sumName = request.args['sName']
 
     print(sumName)
-
+    #pleasework
     sumLevel = riotgames.summonerInfo(sumName)
 
     return json_response(summoner_Level=sumLevel,summoner_Name=sumName)
