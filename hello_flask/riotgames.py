@@ -15,4 +15,4 @@ def summonerInfo(sumName):
     print(rankedStats)
 
 
-    return (me)
+    return (summoner)
