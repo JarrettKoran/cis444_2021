@@ -12,6 +12,6 @@ def summonerInfo(sumName):
     print(me)
 
     for i in me:
-        print(i)
+        print(me.get(i))
 
     return (me)
