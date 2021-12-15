@@ -41,28 +41,10 @@
         });
     }
 
-/*
-    function populateTable() {
-      $.ajax({
-        type: "GET",
-        url: "/populateTable",
-        headers: {Authorization: localStorage.getItem('token')},
-        success: function(temp) {
-          alert('Success');
-          if(temp.jwt == null) {
-            alert(temp.status + '' + temp.msg);
-            window.location.reload();
-          } else {
-
-              $('#sName').append($('<option>',{value: temp.bookTitles[i],text: 'Title: ' + temp.bookTitles[i] + ' Price: ¥' + temp.bookPrices[i]}));
-
-              //alert(i);
-
-          }
-        }
-      });
+    function searching(){
+      sumSearch();
     }
-*/
+
 
 	</script>
 
@@ -70,7 +52,7 @@
       <form id="form">
         <label for="sumName">Enter A Summoner Name:</label><br>
           <input type="text" id="sumName" name="sumName" value="Summoner Name"><br>
-          <input type="button" value="Search" id="Search" onclick="return sumSearch();">
+          <input type="button" value="Search" id="Search" onclick="return searching();">
     </form>
 
     <div id="summonerInfo" style="display:none">
