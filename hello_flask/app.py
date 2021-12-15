@@ -270,7 +270,7 @@ def populateTable():
 
     print(request.args)
 
-    sumName = request.args['sumName']
+    sumName = request.args['sName']
 
     print(sumName)
 
