@@ -46,7 +46,7 @@
         $.ajax({
           type: "GET",
           url: "/populateTable",
-          data: {sumName:$('#sumName').val()},
+          data: {sName:$('#sumName').val()},
           success: function(temp) {
             alert('Success');
             if(temp.Summoner_Name == null) {
