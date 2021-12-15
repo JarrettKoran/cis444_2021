@@ -17,11 +17,6 @@ def summonerInfo(sumName):
 
     print(summoner['summonerLevel'])
 
-    print(rankedStats['tier'])
-    print(rankedStats['rank'])
-    print(rankedStats['leaguePoints'])
-    print(rankedStats['wins'])
-    print(rankedStats['losses'])
 
 
-    return (12)
+    return (summoner['summonerLevel'])
