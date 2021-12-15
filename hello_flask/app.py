@@ -5,7 +5,7 @@ import jwt
 from datetime import date
 import bcrypt
 
-import riotgames.py
+import riotgames
 
 from db_con import get_db_instance, get_db
 
