@@ -10,3 +10,5 @@ def summonerInfo(sumName):
 
     me = watcher.summoner.by_name(my_region, sumName)
     print(me)
+
+    return (me)
