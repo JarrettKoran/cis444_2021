@@ -9,12 +9,12 @@ def summonerInfo(sumName):
     my_region = 'na1'
 
     me = watcher.summoner.by_name(my_region, sumName)
+    me = str(me)
     print(me)
 
-    temp_file = json.dumps(me)
+    json_sumLevel =  me['level']
 
-    with open("my_file.json","w") as file:
-        file.write(temp_file)
+    print('Summoner Level: ' + json_sumLevel)
 
 
     return (me)
